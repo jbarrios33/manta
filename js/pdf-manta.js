@@ -152,22 +152,17 @@ const MantaPDF = (() => {
         doc.setDrawColor(0, 0, 0);
         doc.setLineWidth(0.3);
 
-        // Logo MINSA (imagen real PNG)
+        // Logo MINSA (solo izquierda)
         if (typeof LOGO_MINSA !== 'undefined') {
             doc.addImage(LOGO_MINSA, 'PNG', marginL + 2, 4, 18, 20);
-            // Logo derecho (mismo logo MINSA)
-            doc.addImage(LOGO_MINSA, 'PNG', pageW - marginR - 20, 4, 18, 20);
         } else {
-            // Fallback: circulos simulados si no carga el logo
+            // Fallback: circulo simulado si no carga el logo
             doc.setFillColor(0, 90, 156);
             doc.circle(marginL + 10, 14, 8, 'F');
             doc.setTextColor(255, 255, 255);
             doc.setFontSize(6);
             doc.setFont('helvetica', 'bold');
             doc.text('MINSA', marginL + 10, 13, { align: 'center' });
-            doc.setFillColor(0, 90, 156);
-            doc.circle(pageW - marginR - 10, 14, 8, 'F');
-            doc.text('MINSA', pageW - marginR - 10, 13, { align: 'center' });
         }
 
         // Titulos institucionales
@@ -189,48 +184,48 @@ const MantaPDF = (() => {
 
         // === METADATOS ===
         var my = 25;
-        doc.setFontSize(7);
+        doc.setFontSize(6);
         doc.setTextColor(0, 0, 0);
         doc.setLineWidth(0.2);
 
-        // Fila 1
+        // Fila 1 (comprimida para caber en margenes)
         doc.setFont('helvetica', 'bold');
-        doc.text('INSTALACION:', marginL + 1, my + 3.5);
+        doc.text('INST.:', marginL + 1, my + 3.5);
         doc.setFont('helvetica', 'normal');
-        doc.text(meta.instalacion, marginL + 25, my + 3.5);
+        doc.text(meta.instalacion, marginL + 12, my + 3.5);
 
         doc.setFont('helvetica', 'bold');
-        doc.text('CODIGO:', marginL + 75, my + 3.5);
+        doc.text('COD.:', marginL + 62, my + 3.5);
         doc.setFont('helvetica', 'normal');
-        doc.text(meta.codigo, marginL + 90, my + 3.5);
+        doc.text(meta.codigo, marginL + 73, my + 3.5);
 
         doc.setFont('helvetica', 'bold');
-        doc.text('CENTRO DE PRODUCCION:', marginL + 110, my + 3.5);
+        doc.text('C.PROD.:', marginL + 95, my + 3.5);
         doc.setFont('helvetica', 'normal');
-        doc.text(meta.centroProduccion, marginL + 150, my + 3.5);
+        doc.text(meta.centroProduccion, marginL + 113, my + 3.5);
 
         doc.setFont('helvetica', 'bold');
-        doc.text('FECHA:', marginL + 185, my + 3.5);
+        doc.text('FECHA:', marginL + 145, my + 3.5);
         doc.setFont('helvetica', 'normal');
-        doc.text(meta.fecha, marginL + 197, my + 3.5);
+        doc.text(meta.fecha, marginL + 157, my + 3.5);
 
-        // Casillas tipo jornada
-        var jornadaX = marginL + 215;
-        doc.setFontSize(5.5);
+        // Casillas tipo jornada (comprimidas en 2 filas x 4)
+        var jornadaX = marginL + 175;
+        doc.setFontSize(4.5);
         for (var i = 0; i < 4; i++) {
-            var jx = jornadaX + (i * 17);
-            doc.rect(jx, my, 3, 3, 'S');
+            var jx = jornadaX + (i * 21);
+            doc.rect(jx, my, 2.5, 2.5, 'S');
             if (i === 0) {
                 doc.setFont('helvetica', 'bold');
-                doc.text('X', jx + 0.8, my + 2.5);
+                doc.text('X', jx + 0.6, my + 2);
                 doc.setFont('helvetica', 'normal');
             }
-            doc.text(RDA.tiposJornada[i], jx + 4, my + 2.5);
+            doc.text(RDA.tiposJornada[i], jx + 3.5, my + 2);
         }
         for (var i2 = 4; i2 < Math.min(8, RDA.tiposJornada.length); i2++) {
-            var jx2 = jornadaX + ((i2 - 4) * 17);
-            doc.rect(jx2, my + 4, 3, 3, 'S');
-            doc.text(RDA.tiposJornada[i2], jx2 + 4, my + 6.5);
+            var jx2 = jornadaX + ((i2 - 4) * 21);
+            doc.rect(jx2, my + 3.5, 2.5, 2.5, 'S');
+            doc.text(RDA.tiposJornada[i2], jx2 + 3.5, my + 5.5);
         }
 
         my += 6;
