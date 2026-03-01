@@ -152,24 +152,23 @@ const MantaPDF = (() => {
         doc.setDrawColor(0, 0, 0);
         doc.setLineWidth(0.3);
 
-        // Logo MINSA (simulado)
-        doc.setFillColor(0, 90, 156);
-        doc.circle(marginL + 10, 14, 8, 'F');
-        doc.setTextColor(255, 255, 255);
-        doc.setFontSize(6);
-        doc.setFont('helvetica', 'bold');
-        doc.text('MINSA', marginL + 10, 13, { align: 'center' });
-        doc.setFontSize(4);
-        doc.text('PANAMA', marginL + 10, 16, { align: 'center' });
-
-        // Logo derecho (simulado)
-        doc.setFillColor(0, 90, 156);
-        doc.circle(pageW - marginR - 10, 14, 8, 'F');
-        doc.setTextColor(255, 255, 255);
-        doc.setFontSize(5);
-        doc.text('SES', pageW - marginR - 10, 14, { align: 'center' });
-        doc.setFontSize(4);
-        doc.text('SALUD', pageW - marginR - 10, 17, { align: 'center' });
+        // Logo MINSA (imagen real PNG)
+        if (typeof LOGO_MINSA !== 'undefined') {
+            doc.addImage(LOGO_MINSA, 'PNG', marginL + 2, 4, 18, 20);
+            // Logo derecho (mismo logo MINSA)
+            doc.addImage(LOGO_MINSA, 'PNG', pageW - marginR - 20, 4, 18, 20);
+        } else {
+            // Fallback: circulos simulados si no carga el logo
+            doc.setFillColor(0, 90, 156);
+            doc.circle(marginL + 10, 14, 8, 'F');
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(6);
+            doc.setFont('helvetica', 'bold');
+            doc.text('MINSA', marginL + 10, 13, { align: 'center' });
+            doc.setFillColor(0, 90, 156);
+            doc.circle(pageW - marginR - 10, 14, 8, 'F');
+            doc.text('MINSA', pageW - marginR - 10, 13, { align: 'center' });
+        }
 
         // Titulos institucionales
         doc.setTextColor(0, 0, 0);
