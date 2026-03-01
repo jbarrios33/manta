@@ -1,0 +1,14 @@
+# Archivos temporales
+nul
+*.tmp
+*.bak
+
+# Archivos de referencia OCR (ya no existen)
+rda_page*.png
+
+# Dependencias PHP de otro proyecto
+includes/
+
+# Archivos de sistema
+Thumbs.db
+.DS_Store
