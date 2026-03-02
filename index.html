@@ -300,15 +300,49 @@
                 <!-- Tab: Dictado -->
                 <div class="tab-content active" id="tab-dictado">
                     <div class="dictation-area">
-                        <div class="mic-container">
-                            <button id="btn-dictate" class="btn-mic">
-                                <i class="fas fa-microphone"></i>
-                            </button>
-                            <span class="mic-label">Pulse para dictar</span>
-                            <div class="mic-waves" id="mic-waves">
-                                <span></span><span></span><span></span><span></span>
+
+                        <!-- Guía de formato de dictado -->
+                        <div class="dictation-guide" id="dictation-guide">
+                            <div class="guide-header">
+                                <i class="fas fa-info-circle"></i> Diga en este orden:
+                            </div>
+                            <p class="guide-template">
+                                <em>"Cédula <strong>8-123-4567</strong>, <strong>masculino</strong>, <strong>45</strong> años, 
+                                <strong>primera vez</strong>, residente de <strong>Betania</strong>, 
+                                diagnóstico <strong>hipertensión arterial</strong>, 
+                                procedimiento <strong>consulta general</strong>"</em>
+                            </p>
+                        </div>
+
+                        <!-- Dos micrófonos -->
+                        <div class="dual-mic-container">
+                            <!-- Micrófono REAL -->
+                            <div class="mic-container mic-real">
+                                <button id="btn-dictate-real" class="btn-mic btn-mic-real">
+                                    <i class="fas fa-microphone"></i>
+                                </button>
+                                <span class="mic-label">🎤 Dictar (real)</span>
+                                <div class="mic-waves" id="mic-waves-real">
+                                    <span></span><span></span><span></span><span></span>
+                                </div>
+                                <span class="mic-sublabel">Web Speech API</span>
+                            </div>
+
+                            <!-- Micrófono SIMULADO -->
+                            <div class="mic-container mic-sim">
+                                <button id="btn-dictate" class="btn-mic btn-mic-sim">
+                                    <i class="fas fa-robot"></i>
+                                </button>
+                                <span class="mic-label">🤖 Simular (demo)</span>
+                                <div class="mic-waves" id="mic-waves">
+                                    <span></span><span></span><span></span><span></span>
+                                </div>
+                                <span class="mic-sublabel">Typewriter demo</span>
                             </div>
                         </div>
+
+                        <!-- Indicador de estado del reconocimiento -->
+                        <div class="speech-status" id="speech-status"></div>
 
                         <div class="dictation-transcript" id="dictation-transcript">
                             <p class="placeholder-text">El texto dictado aparecerá aquí...</p>
@@ -336,6 +370,11 @@
                                     <label>Atención:</label>
                                     <input type="text" id="dict-atencion" placeholder="—" readonly>
                                     <span class="field-status" id="status-atencion"></span>
+                                </div>
+                                <div class="field-item">
+                                    <label>Residencia:</label>
+                                    <input type="text" id="dict-residencia" placeholder="—" readonly>
+                                    <span class="field-status" id="status-residencia"></span>
                                 </div>
                                 <div class="field-item">
                                     <label>Diagnóstico:</label>
