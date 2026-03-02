@@ -87,7 +87,7 @@ const Dictation = (() => {
             isRealRecording = true;
             elements.btnDictateReal.classList.add('recording');
             elements.micWavesReal.classList.add('active');
-            updateSpeechStatus('í´´ Escuchando... Hable ahora', 'recording');
+            updateSpeechStatus('ï¿½ï¿½ï¿½ Escuchando... Hable ahora', 'recording');
             elements.guide.classList.add('guide-active');
         };
 
@@ -293,7 +293,7 @@ const Dictation = (() => {
         // Buscar en la base de diagnosticos
         for (var i = 0; i < DataPanama.diagnosticos.length; i++) {
             var dx = DataPanama.diagnosticos[i];
-            if (dx.desc.toLowerCase().indexOf(d) >= 0 || d.indexOf(dx.desc.toLowerCase().split(' ')[0]) >= 0) {
+            if (dx.descripcion.toLowerCase().indexOf(d) >= 0 || d.indexOf(dx.descripcion.toLowerCase().split(' ')[0]) >= 0) {
                 return dx.codigo;
             }
         }
@@ -366,7 +366,7 @@ const Dictation = (() => {
         isRecording = true;
         elements.btnDictate.classList.add('recording');
         elements.micWaves.classList.add('active');
-        updateSpeechStatus('í´– Simulando dictado...', 'recording');
+        updateSpeechStatus('ï¿½ï¿½ï¿½ Simulando dictado...', 'recording');
 
         clearFields();
         currentPatient = DataPanama.generarPaciente();
